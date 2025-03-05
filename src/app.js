@@ -2,7 +2,7 @@ import express, { urlencoded } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 const app = express()
-app.unsubscribe(cors({
+app.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials:true
 }))
@@ -15,4 +15,9 @@ app.use(express.urlencoded({
 }))
 app.use(express.static('public'))
 app.use(cookieParser())
+
+//importing routes
+import userRouter from './routes/user.routes.js'
+app.use('/api/v1/users',userRouter)
+
 export {app}
